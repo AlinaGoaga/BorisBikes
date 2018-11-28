@@ -8,4 +8,10 @@ require 'borrisbikes'
 
 describe DockingStation do
   it { is_expected.to respond_to :release_bike }
+
+  it 'gets a working bike' do
+    bike = DockingStation.new.release_bike
+    expect(bike.working?).to be true
+  end
+
 end
