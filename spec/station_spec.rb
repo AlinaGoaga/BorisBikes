@@ -1,4 +1,4 @@
-require 'borrisbikes'
+require 'station'
 
 #describe DockingStation do
 #  it 'responds to release_bike' do
@@ -13,5 +13,15 @@ describe DockingStation do
     bike = DockingStation.new.release_bike
     expect(bike.working?).to be true
   end
+
+  it { is_expected.to respond_to(:dock_bike).with(1).argument }
+
+  it 'docks the bike into the station' do
+    station = DockingStation.new
+    bike = Bike.new
+    expect(station.dock_bike(bike)).to eq bike
+  end
+
+  it { is_expected.to respond_to :bike }
 
 end
