@@ -5,6 +5,8 @@ RSpec.describe DockingStation do
     @station = DockingStation.new
   end
 
+  it { is_expected.to respond_to :bike } # testing reader
+
   it { is_expected.to respond_to :release_bike }
 
   it { is_expected.to respond_to(:dock_bike).with(1).argument }
@@ -13,8 +15,6 @@ RSpec.describe DockingStation do
     bike = Bike.new
     expect(@station.dock_bike(bike)).to eq bike
   end
-
-  it { is_expected.to respond_to :bike } # testing reader
 
   describe '#release_bike' do
     it 'releases a bike' do
@@ -35,8 +35,8 @@ RSpec.describe DockingStation do
     end
   end
 
-  it 'raises an error when we try to add another bike to a docking station that is full already' do
-    @station.dock_bike(Bike.new)
+  it 'raises an error when we try to add another bike when the station has 20 bikes already' do
+    20.times { @station.dock_bike(Bike.new) }
     expect { @station.dock_bike(Bike.new) }.to raise_error 'Station full'
   end
 end
