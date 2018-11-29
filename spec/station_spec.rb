@@ -34,4 +34,9 @@ RSpec.describe DockingStation do
       expect { @station.release_bike }.to raise_error 'No bikes available'
     end
   end
+
+  it 'raises an error when we try to add another bike to a docking station that is full already' do
+    @station.dock_bike(Bike.new)
+    expect { @station.dock_bike(Bike.new) }.to raise_error 'Station full'
+  end
 end
