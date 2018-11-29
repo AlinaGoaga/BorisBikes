@@ -11,9 +11,9 @@ RSpec.describe DockingStation do
 
   it { is_expected.to respond_to(:dock_bike).with(1).argument }
 
-  it 'returns docked bike' do
+  it 'returns a station that includes the bike which has just been docked' do
     bike = Bike.new
-    expect(@station.dock_bike(bike)).to eq bike
+    expect(@station.dock_bike(bike)).to include(bike)
   end
 
   describe '#release_bike' do
