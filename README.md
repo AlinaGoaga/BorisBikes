@@ -1,15 +1,17 @@
 Boris Bikes
 ===========
-   
-# To run the application:
 
+```
+To run the application:
+```
 -clone the repository
 -cd into project folder
 -run bundle
 -start irb and require './lib/station.rb'
 
-# Tests
-
+```
+Tests
+```
 -used rspec to write feature and unit tests
 -classes being test in isolation with the help of doubles
 -to run tests simply run rspec in the main project folder
