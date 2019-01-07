@@ -23,7 +23,7 @@ class DockingStation
   private
 
   def full?
-    @bikes.length >= @capacity
+    @bikes.count >= capacity
    end
 
   def working_bikes
