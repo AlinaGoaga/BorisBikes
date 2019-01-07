@@ -3,9 +3,7 @@ require 'station'
 RSpec.describe DockingStation do
   let(:bike) { double :bike }
 
-  it { is_expected.to respond_to :bikes } # testing reader
-
-  describe 'initialization' do
+  describe '#initialization' do
     it 'has a variable capacity' do
       docking_station = DockingStation.new(50)
       allow(bike).to receive(:dock_bike)
@@ -35,20 +33,15 @@ RSpec.describe DockingStation do
 
   describe '#release_bike' do
     it 'releases a bike' do
-      allow(bike).to receive(:dock_bike)
+      allow(bike).to receive(:broken?).and_return(false)
       subject.dock_bike(bike)
       expect(subject.release_bike).to eq bike
     end
 
-    it 'always releases a working bike' do
-      allow(bike).to receive(:working?).and_return(true)
+    it 'does not release broken bikes' do
+      allow(bike).to receive(:broken?).and_return(true)
       subject.dock_bike(bike)
-      bike = subject.release_bike
-      expect(bike).to be_working
-    end
-
-    it 'raises an error when there are no bikes available' do
-      expect { subject.release_bike }.to raise_error 'No bikes available'
+      expect { subject.release_bike }.to raise_error 'No working bikes available'
     end
   end
 end

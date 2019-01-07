@@ -16,8 +16,8 @@ class DockingStation
   end
 
   def release_bike
-    raise 'No bikes available' unless empty? == false
-    @bikes.first
+    raise 'No working bikes available' if working_bikes.empty?
+    working_bikes.first
   end
 
   private
@@ -26,7 +26,7 @@ class DockingStation
     @bikes.length >= @capacity
    end
 
-  def empty?
-    @bikes.empty?
+  def working_bikes
+    @bikes.reject(&:broken?)
   end
 end
